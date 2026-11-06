@@ -42,11 +42,24 @@ jobs:
           npx cap add android
           npx cap sync
 
+      - name: Fix Kotlin Version Conflict
+        run: |
+          echo "
+          allprojects {
+              configurations.all {
+                  resolutionStrategy {
+                      force 'org.jetbrains.kotlin:kotlin-stdlib:1.9.24'
+                      force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.24'
+                      force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.24'
+                  }
+              }
+          }" >> android/build.gradle
+
       - name: Build Debug APK with Gradle
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew clean assembleDebug --refresh-dependencies
+          ./gradlew clean assembleDebug
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
