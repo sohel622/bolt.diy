@@ -24,16 +24,16 @@ jobs:
         run: |
           npm install --legacy-peer-deps
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Setup Web Assets Directory
         run: |
           mkdir -p dist
-          echo "<(!DOCTYPE html><html><head><title>BoltDIY</title></head><body><h1>BoltDIY App</h1></body></html>" > dist/index.html
+          echo "<!DOCTYPE html><html><head><title>BoltDIY</title></head><body><h1>BoltDIY App</h1></body></html>" > dist/index.html
 
       - name: Setup Capacitor and Android Platform
         run: |
