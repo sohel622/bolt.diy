@@ -1,4 +1,4 @@
-name: Build Android APK ⤴️
+name: Build Android APK
 
 on:
   push:
@@ -20,10 +20,9 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Dependencies & Build Web App
+      - name: Install Dependencies
         run: |
           npm install --legacy-peer-deps
-          npm run build
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -34,6 +33,7 @@ jobs:
       - name: Setup Capacitor and Android Platform
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android --legacy-peer-deps
+          npx cap init "BoltDIY" "com.bolt.diy" --web-dir dist --yes
           npx cap add android
           npx cap sync
 
