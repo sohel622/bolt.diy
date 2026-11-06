@@ -30,6 +30,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Setup Web Assets Directory
+        run: |
+          mkdir -p dist
+          echo "<(!DOCTYPE html><html><head><title>BoltDIY</title></head><body><h1>BoltDIY App</h1></body></html>" > dist/index.html
+
       - name: Setup Capacitor and Android Platform
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android --legacy-peer-deps
